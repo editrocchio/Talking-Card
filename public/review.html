@@ -7,13 +7,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <!--<link rel="stylesheet" type="text/css" media="screen" href="main.css" />-->
 
 
 </head>
 
 <body>
   <h1 class="deck_name">Deck Title</h1>
+  <p class="question_number">1</p>
   <div class="question">
     <p>Question</p>
   </div>
@@ -38,14 +39,52 @@
     firebase.initializeApp(config);
   </script>
   <script>
-    function loadDeck() {
-      // Load the deck name, questoin, and answers
-    }
     
-    function nextQuestion() {
 
+    class Card {
+      constructor(question, answer) {
+        this.questionNumber = questionNo;
+        this.question = question;
+        this.answer = answer;
+
+        questionNo++;
+      }
     }
 
+    var questionNo = 1;
+    var cards = loadDeck();
+    var cardIndex = 0;
+
+    function loadDeck() {
+      var decks = firebase.database().ref("Cooking");
+      var arr = [];
+      decks.on('value', function(snap) {
+        
+        for (var deck in snap.val()) {
+          
+          var question = snap.val()[deck]['question'];
+          var answer = snap.val()[deck]['answer'];
+          var card = new Card(question, answer);
+          arr.push(card);
+        }
+      });
+      return arr;
+      
+    }
+
+    function nextQuestion() {
+      
+    }
+
+    function displayQuestion(question, answer, deckName, questionNumber) {
+      document.getElementsByClassName('question')[0].innerHTML = question;
+      document.getElementsByClassName('answer')[0].innerHTML = answer
+      document.getElementsByClassName('deck_name')[0].innerHTML = deckName;
+      document.getElementByClassName('question_number')[0].innerHTML = questionNumber;
+    };
+
+    
+    nextQuestion();
   </script>
 </body>
 
