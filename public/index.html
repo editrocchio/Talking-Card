@@ -9,6 +9,19 @@
   <meta name="author" content="">
 
   <title>QuizVoice</title>
+  <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCT93pdmlknF9fFq4bHM7mpiF_45hZWraw",
+      authDomain: "co-op-hackathon.firebaseapp.com",
+      databaseURL: "https://co-op-hackathon.firebaseio.com",
+      projectId: "co-op-hackathon",
+      storageBucket: "co-op-hackathon.appspot.com",
+      messagingSenderId: "86999184000"
+    };
+    firebase.initializeApp(config);
+  </script>
   <script src="vendor/jquery/jquery.min.js"></script>
 
   <!-- Semantic UI-->
@@ -24,7 +37,7 @@
     type="text/css">
 
   <!-- Custom styles for this template -->
-  <link href="css/landing-page.min.css" rel="stylesheet">
+  <link href="css/landing-page.css" rel="stylesheet">
 
 </head>
 
@@ -47,8 +60,8 @@
           <h1 class="mb-5">Create voice controlled flash card quizzes to review for your classes! </h1>
         </div>
         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-          <div class="ui search">
-            <input class="prompt" type="text" placeholder="Common passwords...">
+          <div class="ui search" style="font-size: 2em">
+            <input class="prompt" type="text" placeholder="Search Decks">
             <div class="results"></div>
           </div>
         </div>

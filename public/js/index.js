@@ -1,81 +1,25 @@
 $(document).ready(function () {
-    $('.ui.search')
-        .search({
-            source: content
-        });
+    searchBoxFirebase();
 });
 
-var content = [{
-        title: 'Andorra'
-    },
-    {
-        title: 'United Arab Emirates'
-    },
-    {
-        title: 'Afghanistan'
-    },
-    {
-        title: 'Antigua'
-    },
-    {
-        title: 'Anguilla'
-    },
-    {
-        title: 'Albania'
-    },
-    {
-        title: 'Armenia'
-    },
-    {
-        title: 'Netherlands Antilles'
-    },
-    {
-        title: 'Angola'
-    },
-    {
-        title: 'Argentina'
-    },
-    {
-        title: 'American Samoa'
-    },
-    {
-        title: 'Austria'
-    },
-    {
-        title: 'Australia'
-    },
-    {
-        title: 'Aruba'
-    },
-    {
-        title: 'Aland Islands'
-    },
-    {
-        title: 'Azerbaijan'
-    },
-    {
-        title: 'Bosnia'
-    },
-    {
-        title: 'Barbados'
-    },
-    {
-        title: 'Bangladesh'
-    },
-    {
-        title: 'Belgium'
-    },
-    {
-        title: 'Burkina Faso'
-    },
-    {
-        title: 'Bulgaria'
-    },
-    {
-        title: 'Bahrain'
-    },
-    {
-        title: 'Burundi'
-    }
-    // etc
-];
+function searchBoxInit() {
+    $('.ui.search')
+        .search({
+            source: content1
+        });
+}
+var content1 = [];
+
+function searchBoxFirebase() {
+
+    firebase.database().ref().once("value").then(function (snapshot) {
+        snapshot.forEach(function (childsnapshot) {
+            console.log(childsnapshot.key);
+            var addition = {
+                title: childsnapshot.key
+            };
+            content1.push(addition);
+        })
+
+    }).then(searchBoxInit);
+}
