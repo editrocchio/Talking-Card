@@ -233,6 +233,8 @@
         hideAnswer();
       } else {
         showAnswer();
+        document.getElementById("get_answer").value = "Hide Answer";
+        readText("answer");
       }
     }
 
@@ -249,6 +251,66 @@
     document.getElementById("add_answer").addEventListener('click', addAnswer);
 
     displayDeckName();
+
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+    var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+    var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+
+    var commands = [ 'question', 'next' , 'show', ,'hide', 'edit', 'previous'];
+    var grammar = '#JSGF V1.0; grammar commands; public <command> = ' + commands.join(' | ') + ' ;'
+
+    var recognition = new SpeechRecognition();
+    speechRecognitionList = new SpeechGrammarList();
+    speechRecognitionList.addFromString(grammar, 1);
+
+    recognition.grammars = speechRecognitionList;
+    //recognition.continuous = false;
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+
+    document.addEventListener('keydown', function(event) {
+        if(event.keyCode == 32) {
+            console.log('Ready to receive a command.');
+            recognition.start();
+        }
+    });
+
+    recognition.onresult = function(event) {
+      var last = event.results.length - 1;
+      var word = (event.results[last][0].transcript);
+
+      if(word == "next") {
+        nextQuestion();
+        readText("question")
+      } else if(word == "answer") {
+        showAnswer();
+        readText("answer")
+      } else if(word == "edit") {
+        addAnswer();
+      }else if(word == "question"){
+        readText("question");
+      }else if(word == "previous"){
+        previousQuestion();
+        readText("question");
+      }
+    }
+    //Stops it after a word has been spoken
+    recognition.onspeechend = function() {
+      recognition.stop();
+    }
+
+    recognition.onnomatch = function(event) {
+      diagnostic.textContent = 'I didnt recognise that command.';
+    }
+    
+    function readText(commandText){
+        var test = "" + document.getElementsByClassName(commandText)[0].innerHTML;
+        var msg = new SpeechSynthesisUtterance(test);
+        window.speechSynthesis.speak(msg);
+    }
+
   </script>
 </body>
 

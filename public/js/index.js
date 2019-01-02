@@ -4,10 +4,7 @@ $(document).ready(function () {
     $("#createButton").click(function () {
         passDeckName($("#createInput").val());
         var nametoCreate = $("#createInput").val();
-
         window.location.href = "create.html";
-
-
     });
 });
 
