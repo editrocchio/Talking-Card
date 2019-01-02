@@ -155,6 +155,8 @@
         hideAnswer();
       } else {
         showAnswer();
+        document.getElementById("get_answer").value = "Hide Answer";
+        readText("answer");
       }
     }
 
@@ -176,7 +178,7 @@
     var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
     var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-    var commands = [ 'next' , 'answer', 'add' ];
+    var commands = [ 'question', 'next' , 'show', ,'hide', 'edit', 'previous'];
     var grammar = '#JSGF V1.0; grammar commands; public <command> = ' + commands.join(' | ') + ' ;'
 
     var recognition = new SpeechRecognition();
@@ -203,10 +205,17 @@
 
       if(word == "next") {
         nextQuestion();
+        readText("question")
       } else if(word == "answer") {
         showAnswer();
-      } else if(word == "add") {
-        //
+        readText("answer")
+      } else if(word == "edit") {
+        addAnswer();
+      }else if(word == "question"){
+        readText("question");
+      }else if(word == "previous"){
+        previousQuestion();
+        readText("question");
       }
     }
     //Stops it after a word has been spoken
@@ -216,6 +225,12 @@
 
     recognition.onnomatch = function(event) {
       diagnostic.textContent = 'I didnt recognise that command.';
+    }
+    
+    function readText(commandText){
+        var test = "" + document.getElementsByClassName(commandText)[0].innerHTML;
+        var msg = new SpeechSynthesisUtterance(test);
+        window.speechSynthesis.speak(msg);
     }
 
   </script>
