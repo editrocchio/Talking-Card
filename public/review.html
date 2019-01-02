@@ -38,10 +38,10 @@
       </div>
     </p>
   </div>
-
+  <input type="button" value="Previous" id="previous_question" class="previous_question">
   <input type="button" value="Next" id="next_question" class="next_question">
   <input type="button" value="Show Answer" id="get_answer" class="get_answer">
-  <input type="button" value="Add New Question" class="add_question">
+  <input type="button" value="Edit Deck" class="add_question" id="add_answer">
 
   <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
   <script>
@@ -101,17 +101,29 @@
 
     function firstQuestion(listofcards) {
       displayQuestion(listofcards[cardIndex].question, listofcards[cardIndex].answer, listofcards[cardIndex].questionNumber);
-      cardIndex++;
     }
 
     function nextQuestion() {
-      if (cardIndex == cards.length) {
+      if (cardIndex == cards.length - 1) {
         cardIndex = 0;
+      } else{
+        cardIndex++;
       }
       displayQuestion(cards[cardIndex].question, cards[cardIndex].answer, cards[cardIndex].questionNumber);
-      cardIndex++;
-
+      console.log(cardIndex);
       hideAnswer();
+    }
+    
+    function previousQuestion(){
+      if (cardIndex == 0){
+        cardIndex = cards.length -1;
+      } else {
+        cardIndex--;
+      }
+      console.log(cardIndex);
+        displayQuestion(cards[cardIndex].question, cards[cardIndex].answer, cards[cardIndex].questionNumber);
+      hideAnswer();
+      
     }
 
     function displayQuestion(question, answer, questionNumber) {
@@ -143,9 +155,18 @@
         document.getElementById("get_answer").value = "Hide Answer";
       }
     }
-
+    
+    function addAnswer(){
+      passDeckName(deckName);
+      window.location.href = "create.html";
+    }
+    function passDeckName(name) {
+    sessionStorage.setItem('deckName', name);
+    }
+    document.getElementById("previous_question").addEventListener('click', previousQuestion);
     document.getElementById("next_question").addEventListener('click', nextQuestion);
     document.getElementById("get_answer").addEventListener('click', toggleAnswer);
+    document.getElementById("add_answer").addEventListener('click', addAnswer);
 
     displayDeckName();
   </script>
