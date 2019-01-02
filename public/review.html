@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Page Title</title>
+  <title>QuizVoice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Bootstrap core CSS -->
@@ -21,30 +21,110 @@
 </head>
 
 <body>
-  <h1 id="deck_name" class="deck_name">
-    <div class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
+  <!-- Navigation -->
+  <nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+      <a class="navbar-brand " href="./index.html">
+        <h3>Quiz Voice</h3>
+      </a>
+      <input type="button" value="Edit Deck" class="add_question btn btn-outline-dark" id="add_answer">
+
     </div>
-  </h1>
-  <p class="question_number">1</p>
-  <div class="question">
-    <p>
-      <div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
+  </nav>
+
+  <!-- Card Container -->
+  <div class="container">
+    <div class="title-box">
+      <h1 id="deck_name" class="deck_name">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </h1>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title question_number"></h5>
+            <div class="card-text question">
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </p>
-  </div>
-  <div class="answer">
-    <p>
-      <div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
+
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Answer</h5>
+            <div class="card-text answer">
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </p>
+    </div>
+
+    <div class="button-group d-flex justify-content-between">
+      <input type="button" value="Prev" id="previous_question" class="previous_question btn btn-outline-primary">
+      <input type="button" value="Show Answer" id="get_answer" class="get_answer btn btn-primary">
+      <input type="button" value="Next" id="next_question" class="next_question btn btn-outline-primary">
+    </div>
   </div>
-  <input type="button" value="Previous" id="previous_question" class="previous_question">
-  <input type="button" value="Next" id="next_question" class="next_question">
-  <input type="button" value="Show Answer" id="get_answer" class="get_answer">
-  <input type="button" value="Edit Deck" class="add_question" id="add_answer">
+
+
+  <!-- Footer -->
+  <footer class="footer bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+          <ul class="list-inline mb-2">
+            <li class="list-inline-item">
+              <a href="#">About</a>
+            </li>
+            <li class="list-inline-item">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="#">Contact</a>
+            </li>
+            <li class="list-inline-item">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="#">Terms of Use</a>
+            </li>
+            <li class="list-inline-item">&sdot;</li>
+            <li class="list-inline-item">
+              <a href="#">Privacy Policy</a>
+            </li>
+          </ul>
+          <p class="text-muted small mb-4 mb-lg-0">&copy; Quiz Voice. All Rights Reserved.</p>
+        </div>
+        <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item mr-3">
+              <a href="#">
+                <i class="fab fa-facebook fa-2x fa-fw"></i>
+              </a>
+            </li>
+            <li class="list-inline-item mr-3">
+              <a href="#">
+                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-instagram fa-2x fa-fw"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 
   <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
   <script>
@@ -112,7 +192,6 @@
         cardIndex++;
       }
       displayQuestion(cards[cardIndex].question, cards[cardIndex].answer, cards[cardIndex].questionNumber);
-      console.log(cardIndex);
       hideAnswer();
     }
 
@@ -122,7 +201,6 @@
       } else {
         cardIndex--;
       }
-      console.log(cardIndex);
       displayQuestion(cards[cardIndex].question, cards[cardIndex].answer, cards[cardIndex].questionNumber);
       hideAnswer();
 
@@ -131,7 +209,7 @@
     function displayQuestion(question, answer, questionNumber) {
       document.getElementsByClassName('question')[0].innerHTML = question;
       document.getElementsByClassName('answer')[0].innerHTML = answer;
-      document.getElementsByClassName('question_number')[0].innerHTML = questionNumber;
+      document.getElementsByClassName('question_number')[0].innerHTML = 'Question ' + questionNumber;
     };
 
     function displayDeckName() {
