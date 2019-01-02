@@ -152,6 +152,9 @@
       } else {
         showAnswer();
         document.getElementById("get_answer").value = "Hide Answer";
+        var test = "" + document.getElementsByClassName('answer')[0].innerHTML;
+        var msg = new SpeechSynthesisUtterance(test);
+        window.speechSynthesis.speak(msg);
       }
     }
     
