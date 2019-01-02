@@ -1,3 +1,38 @@
 .answer{
     visibility: hidden;
 }
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.card {
+    min-height: 200px;
+    margin: 10px 0;
+}
+
+.title-box {
+    text-align: center;
+    margin: 20px;
+}
+
+.title-box > .deck_name {
+    font-weight: lighter;
+}
+
+.button-group {
+    margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        position: inherit;
+    }
+
+    .button-group {
+        margin: 0 0 10px 0;
+    }
+}
