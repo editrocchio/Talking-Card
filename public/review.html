@@ -178,7 +178,7 @@
     var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
     var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
-    var commands = [ 'question', 'next' , 'show', ,'hide', 'edit', 'previous'];
+    var commands = [ 'question', 'next' , 'show', ,'hide', 'edit', 'previous', 'help'];
     var grammar = '#JSGF V1.0; grammar commands; public <command> = ' + commands.join(' | ') + ' ;'
 
     var recognition = new SpeechRecognition();
@@ -216,6 +216,9 @@
       }else if(word == "previous"){
         previousQuestion();
         readText("question");
+      } else if(word == "help") {
+        var msg = new SpeechSynthesisUtterance("You can say the commands next, previous, edit, question, or help to hear this list again.");
+        window.speechSynthesis.speak(msg);
       }
     }
     //Stops it after a word has been spoken
@@ -226,7 +229,7 @@
     recognition.onnomatch = function(event) {
       diagnostic.textContent = 'I didnt recognise that command.';
     }
-    
+
     function readText(commandText){
         var test = "" + document.getElementsByClassName(commandText)[0].innerHTML;
         var msg = new SpeechSynthesisUtterance(test);
