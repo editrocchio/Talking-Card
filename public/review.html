@@ -6,15 +6,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!--<link rel="stylesheet" type="text/css" media="screen" href="main.css" />-->
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-    crossorigin="anonymous">
-  <style>
-    .answer{
-      visibility: hidden;
-    }
-  </style>
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+    type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/review.css" rel="stylesheet">
 </head>
 
 <body>
@@ -38,10 +41,10 @@
       </div>
     </p>
   </div>
-
+  <input type="button" value="Previous" id="previous_question" class="previous_question">
   <input type="button" value="Next" id="next_question" class="next_question">
   <input type="button" value="Show Answer" id="get_answer" class="get_answer">
-  <input type="button" value="Add New Question" class="add_question">
+  <input type="button" value="Edit Deck" class="add_question" id="add_answer">
 
   <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
   <script>
@@ -100,17 +103,29 @@
 
     function firstQuestion(listofcards) {
       displayQuestion(listofcards[cardIndex].question, listofcards[cardIndex].answer, listofcards[cardIndex].questionNumber);
-      cardIndex++;
     }
 
     function nextQuestion() {
-      if (cardIndex == cards.length) {
+      if (cardIndex == cards.length - 1) {
         cardIndex = 0;
+      } else {
+        cardIndex++;
       }
       displayQuestion(cards[cardIndex].question, cards[cardIndex].answer, cards[cardIndex].questionNumber);
-      cardIndex++;
-
+      console.log(cardIndex);
       hideAnswer();
+    }
+
+    function previousQuestion() {
+      if (cardIndex == 0) {
+        cardIndex = cards.length - 1;
+      } else {
+        cardIndex--;
+      }
+      console.log(cardIndex);
+      displayQuestion(cards[cardIndex].question, cards[cardIndex].answer, cards[cardIndex].questionNumber);
+      hideAnswer();
+
     }
 
     function displayQuestion(question, answer, questionNumber) {
@@ -126,25 +141,34 @@
     function showAnswer() {
       document.getElementsByClassName('answer')[0].style.visibility = 'visible';
       displayAnswer = true;
+      document.getElementById("get_answer").value = "Hide Answer";
     }
 
     function hideAnswer() {
       document.getElementsByClassName('answer')[0].style.visibility = 'hidden';
       displayAnswer = false;
+      document.getElementById("get_answer").value = "Show Answer";
     }
 
     function toggleAnswer() {
       if (displayAnswer) {
         hideAnswer();
-        document.getElementById("get_answer").value = "Show Answer";
       } else {
         showAnswer();
-        document.getElementById("get_answer").value = "Hide Answer";
       }
     }
 
+    function addAnswer() {
+      passDeckName(deckName);
+      window.location.href = "create.html";
+    }
+    function passDeckName(name) {
+      sessionStorage.setItem('deckName', name);
+    }
+    document.getElementById("previous_question").addEventListener('click', previousQuestion);
     document.getElementById("next_question").addEventListener('click', nextQuestion);
     document.getElementById("get_answer").addEventListener('click', toggleAnswer);
+    document.getElementById("add_answer").addEventListener('click', addAnswer);
 
     displayDeckName();
 
