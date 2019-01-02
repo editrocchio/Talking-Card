@@ -77,7 +77,7 @@
     function getDeckName() {
       // Receive deck name from other page
       return deckName;
-      
+
     }
 
     function loadDeck(deckName) {
@@ -124,7 +124,7 @@
     }
 
     function showAnswer() {
-      document.getElementsByClassName('answer')[0].style.visibility = 'visible'; 
+      document.getElementsByClassName('answer')[0].style.visibility = 'visible';
       displayAnswer = true;
     }
 
@@ -147,6 +147,52 @@
     document.getElementById("get_answer").addEventListener('click', toggleAnswer);
 
     displayDeckName();
+
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+    var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+    var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+
+    var commands = [ 'next' , 'answer', 'add' ];
+    var grammar = '#JSGF V1.0; grammar commands; public <command> = ' + commands.join(' | ') + ' ;'
+
+    var recognition = new SpeechRecognition();
+    speechRecognitionList = new SpeechGrammarList();
+    speechRecognitionList.addFromString(grammar, 1);
+
+    recognition.grammars = speechRecognitionList;
+    //recognition.continuous = false;
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    document.addEventListener('keydown', function(event) {
+        if(event.keyCode == 32) {
+            console.log('Ready to receive a command.');
+            recognition.start();
+        }
+    });
+
+    recognition.onresult = function(event) {
+      var last = event.results.length - 1;
+      var word = (event.results[last][0].transcript);
+
+      if(word == "next") {
+        nextQuestion();
+      } else if(word == "answer") {
+        showAnswer();
+      } else if(word == "add") {
+        //
+      }
+    }
+    //Stops it after a word has been spoken
+    recognition.onspeechend = function() {
+      recognition.stop();
+    }
+
+    recognition.onnomatch = function(event) {
+      diagnostic.textContent = 'I didnt recognise that command.';
+    }
+
   </script>
 </body>
 
