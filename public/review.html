@@ -77,7 +77,7 @@
     function getDeckName() {
       // Receive deck name from other page
       return deckName;
-      
+
     }
 
     function loadDeck(deckName) {
@@ -105,24 +105,24 @@
     function nextQuestion() {
       if (cardIndex == cards.length - 1) {
         cardIndex = 0;
-      } else{
+      } else {
         cardIndex++;
       }
       displayQuestion(cards[cardIndex].question, cards[cardIndex].answer, cards[cardIndex].questionNumber);
       console.log(cardIndex);
       hideAnswer();
     }
-    
-    function previousQuestion(){
-      if (cardIndex == 0){
-        cardIndex = cards.length -1;
+
+    function previousQuestion() {
+      if (cardIndex == 0) {
+        cardIndex = cards.length - 1;
       } else {
         cardIndex--;
       }
       console.log(cardIndex);
-        displayQuestion(cards[cardIndex].question, cards[cardIndex].answer, cards[cardIndex].questionNumber);
+      displayQuestion(cards[cardIndex].question, cards[cardIndex].answer, cards[cardIndex].questionNumber);
       hideAnswer();
-      
+
     }
 
     function displayQuestion(question, answer, questionNumber) {
@@ -136,31 +136,31 @@
     }
 
     function showAnswer() {
-      document.getElementsByClassName('answer')[0].style.visibility = 'visible'; 
+      document.getElementsByClassName('answer')[0].style.visibility = 'visible';
       displayAnswer = true;
+      document.getElementById("get_answer").value = "Hide Answer";
     }
 
     function hideAnswer() {
       document.getElementsByClassName('answer')[0].style.visibility = 'hidden';
       displayAnswer = false;
+      document.getElementById("get_answer").value = "Show Answer";
     }
 
     function toggleAnswer() {
       if (displayAnswer) {
         hideAnswer();
-        document.getElementById("get_answer").value = "Show Answer";
       } else {
         showAnswer();
-        document.getElementById("get_answer").value = "Hide Answer";
       }
     }
-    
-    function addAnswer(){
+
+    function addAnswer() {
       passDeckName(deckName);
       window.location.href = "create.html";
     }
     function passDeckName(name) {
-    sessionStorage.setItem('deckName', name);
+      sessionStorage.setItem('deckName', name);
     }
     document.getElementById("previous_question").addEventListener('click', previousQuestion);
     document.getElementById("next_question").addEventListener('click', nextQuestion);
