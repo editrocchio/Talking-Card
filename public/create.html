@@ -62,6 +62,9 @@
     </div>
 
     <script>
+        let deckName = sessionStorage.getItem("deckName");
+        document.getElementById("deckName").innerHTML = deckName;
+
         document.getElementById("cards").addEventListener('submit', saveCards)
         let uniqueCard = 2;
         function addCard() {
@@ -122,7 +125,7 @@
                     questionNumber += 1;
                 }
             }
-            
+            window.location.href = "./review.html";
         }
     </script>
 </body>
