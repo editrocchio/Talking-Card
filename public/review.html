@@ -57,7 +57,7 @@
     firebase.initializeApp(config);
   </script>
   <script>
-
+    var deckName = sessionStorage.getItem("deckName");
 
     class Card {
       constructor(question, answer) {
@@ -76,7 +76,8 @@
 
     function getDeckName() {
       // Receive deck name from other page
-      return "Cooking";
+      return deckName;
+      
     }
 
     function loadDeck(deckName) {
@@ -91,13 +92,13 @@
           var card = new Card(question, answer);
           arr.push(card);
         }
-        nextQuestion(arr);
+        firstQuestion(arr);
       });
       return arr;
 
     }
 
-    function nextQuestion(listofcards) {
+    function firstQuestion(listofcards) {
       displayQuestion(listofcards[cardIndex].question, listofcards[cardIndex].answer, listofcards[cardIndex].questionNumber);
       cardIndex++;
     }

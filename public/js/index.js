@@ -4,11 +4,9 @@ $(document).ready(function () {
     $("#createButton").click(function () {
         passDeckName($("#createInput").val());
         var nametoCreate = $("#createInput").val();
-        firebase.database().ref('/' + nametoCreate + '/').set({
-            "question1": "No question entered",
-        }).then(function () {
-            window.location.href = "create.html";
-        })
+
+        window.location.href = "create.html";
+
 
     });
 });
