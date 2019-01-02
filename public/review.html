@@ -22,7 +22,7 @@
     <p>Answer</p>
   </div>
 
-  <input type="button" value="Next" class="next_question">
+  <input type="button" value="Next" id="next_question" class="next_question">
   <input type="button" value="Add New Question" class="add_question">
 
   <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase.js"></script>
@@ -67,24 +67,32 @@
           var card = new Card(question, answer);
           arr.push(card);
         }
+        nextQuestion(arr);
       });
       return arr;
       
     }
 
-    function nextQuestion() {
-      
+    function nextQuestion(listofcards) {
+      displayQuestion(listofcards[cardIndex].question,listofcards[cardIndex].answer,listofcards[cardIndex].questionNumber); 
+      cardIndex++;
     }
 
-    function displayQuestion(question, answer, deckName, questionNumber) {
+    function nextQuestion() {
+      if (cardIndex == cards.length) {
+        cardIndex = 0;
+      }
+      displayQuestion(cards[cardIndex].question,cards[cardIndex].answer,cards[cardIndex].questionNumber); 
+      cardIndex++;
+    }
+
+    function displayQuestion(question, answer, questionNumber) {
       document.getElementsByClassName('question')[0].innerHTML = question;
-      document.getElementsByClassName('answer')[0].innerHTML = answer
-      document.getElementsByClassName('deck_name')[0].innerHTML = deckName;
-      document.getElementByClassName('question_number')[0].innerHTML = questionNumber;
+      document.getElementsByClassName('answer')[0].innerHTML = answer;
+      document.getElementsByClassName('question_number')[0].innerHTML = questionNumber;
     };
 
-    
-    nextQuestion();
+    document.getElementById("next_question").addEventListener('click', nextQuestion);
   </script>
 </body>
 
