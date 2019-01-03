@@ -73,6 +73,7 @@
 
     <div class="button-group d-flex justify-content-between">
       <input type="button" value="Prev" id="previous_question" class="previous_question btn btn-outline-primary">
+      <input type="button" value="Mute" onclick=mute(); class="btn btn-primary" id = "mutebtn">
       <input type="button" value="Show Answer" id="get_answer" class="get_answer btn btn-primary">
       <input type="button" value="Next" id="next_question" class="next_question btn btn-outline-primary">
     </div>
@@ -140,6 +141,7 @@
     };
     firebase.initializeApp(config);
   </script>
+
   <script src="js/review.js"></script>
 </body>
 

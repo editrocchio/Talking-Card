@@ -1,4 +1,5 @@
 var deckName = sessionStorage.getItem("deckName");
+var muteVoice = false;
 
 class Card {
     constructor(question, answer) {
@@ -50,6 +51,12 @@ function nextQuestion() {
         cardIndex++;
     }
     displayQuestion(cards[cardIndex].question, cards[cardIndex].answer, cards[cardIndex].questionNumber);
+    if (!muteVoice) {
+        displayQuestion(cards[cardIndex].question, cards[cardIndex].answer, cards[cardIndex].questionNumber);
+        var msg = new SpeechSynthesisUtterance("question");
+        window.speechSynthesis.speak(msg);
+        readText("question");
+    }
     hideAnswer();
 }
 
@@ -59,7 +66,13 @@ function previousQuestion() {
     } else {
         cardIndex--;
     }
+
     displayQuestion(cards[cardIndex].question, cards[cardIndex].answer, cards[cardIndex].questionNumber);
+    if (!muteVoice) {
+        var msg = new SpeechSynthesisUtterance("question");
+        window.speechSynthesis.speak(msg);
+        readText("question");
+    }
     hideAnswer();
 
 }
@@ -92,7 +105,9 @@ function toggleAnswer() {
     } else {
         showAnswer();
         document.getElementById("get_answer").value = "Hide Answer";
-        readText("answer");
+        if (!muteVoice) {
+            readText("answer");
+        }
     }
 }
 
@@ -175,12 +190,21 @@ recognition2.onresult = function (event) {
 
     }
 }
+document.addEventListener('keyup', function (event) {
+    if (event.keyCode == 32) {
+        console.log('Ready to receive a command.');
+        recognition.stop();
+    }
+});
+
 recognition.onresult = function (event) {
     var last = event.results.length - 1;
     var word = (event.results[last][0].transcript);
 
     if (word == "next") {
         nextQuestion();
+        var msg = new SpeechSynthesisUtterance("question");
+        window.speechSynthesis.speak(msg);
         readText("question")
     } else if (word == "answer") {
         showAnswer();
@@ -188,8 +212,12 @@ recognition.onresult = function (event) {
     } else if (word == "edit") {
         addAnswer();
     } else if (word == "question") {
+        var msg = new SpeechSynthesisUtterance("question");
+        window.speechSynthesis.speak(msg);
         readText("question");
     } else if (word == "previous") {
+        var msg = new SpeechSynthesisUtterance("question");
+        window.speechSynthesis.speak(msg);
         previousQuestion();
         readText("question");
     } else if (word == "help") {
@@ -210,4 +238,16 @@ function readText(commandText) {
     var test = "" + document.getElementsByClassName(commandText)[0].innerHTML;
     var msg = new SpeechSynthesisUtterance(test);
     window.speechSynthesis.speak(msg);
+}
+
+function mute() {
+    if (!muteVoice) {
+        muteVoice = true;
+        document.getElementById("mutebtn").value = "Voice";
+    } else {
+        muteVoice = false;
+        document.getElementById("mutebtn").value = "Mute";
+        readText("question");
+    }
+
 }

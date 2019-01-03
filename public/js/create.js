@@ -40,12 +40,15 @@
       $(newRow).insertBefore('#cards > div:last');
       uniqueCard += 1;
     }
+
     function removeCard(rowID) {
       document.getElementById("cards").removeChild(document.getElementById(rowID));
     }
+
     function saveCards(e) {
       e.preventDefault();
       let deckName = document.getElementById("deckName").innerHTML;
+      firebase.database().ref(deckName).remove();
       let questionNumber = 1;
       for (let i = 1; i < uniqueCard; i++) {
         let card = document.getElementById("row" + parseInt(i));
@@ -64,6 +67,7 @@
       }
       setTimeout(function () { window.location.href = "./review.html"; }, 1000);
     }
+
     function loadCards() {
       let currentDeck = sessionStorage.getItem("deckName");
       let arr = []
@@ -77,6 +81,7 @@
           }
         });
     }
+
     function displayCard(question, answer) {
       let cards = document.getElementById("cards");
       //create new row
