@@ -100,6 +100,7 @@ function addAnswer() {
     passDeckName(deckName);
     window.location.href = "create.html";
 }
+
 function passDeckName(name) {
     sessionStorage.setItem('deckName', name);
 }
@@ -136,7 +137,44 @@ document.addEventListener('keydown', function (event) {
         recognition.start();
     }
 });
+var commands2 = ['apple', 'pineapple', '6', '8'];
 
+var grammar2 = '#JSGF V1.0; grammar commands; public <command> = ' + commands2.join(' | ') + ' ;'
+
+var recognition2 = new SpeechRecognition();
+speechRecognitionList2 = new SpeechGrammarList();
+speechRecognitionList2.addFromString(grammar2, 1);
+
+recognition2.grammars = speechRecognitionList2;
+//recognition.continuous = false;
+recognition2.lang = 'en-US';
+recognition2.interimResults = false;
+recognition2.maxAlternatives = 1;
+document.addEventListener('keydown', function (event) {
+    if (event.keyCode == 65) {
+        console.log('Ready to receive an answer.');
+        recognition2.start();
+    }
+});
+
+recognition2.onresult = function (event) {
+
+    var last2 = event.results.length - 1;
+
+    var word2 = (event.results[last2][0].transcript);
+    var realAnswer = $("#rAnswer").html();
+    console.log(realAnswer);
+    console.log(word2);
+    if (word2.toUpperCase() == realAnswer.toUpperCase()) {
+        console.log("Correctt");
+        var msg2 = new SpeechSynthesisUtterance("Correct");
+        window.speechSynthesis.speak(msg2);
+    } else {
+        var msg3 = new SpeechSynthesisUtterance("Wrong try again");
+        window.speechSynthesis.speak(msg3);
+
+    }
+}
 recognition.onresult = function (event) {
     var last = event.results.length - 1;
     var word = (event.results[last][0].transcript);
