@@ -74,6 +74,7 @@
     <div class="button-group d-flex justify-content-between">
       <input type="button" value="Prev" id="previous_question" class="previous_question btn btn-outline-primary">
       <input type="button" value="Show Answer" id="get_answer" class="get_answer btn btn-primary">
+      <input type="button" value="Read Intro" onclick=intro(); class="btn btn-primary">
       <input type="button" value="Next" id="next_question" class="next_question btn btn-outline-primary">
     </div>
   </div>
@@ -193,6 +194,7 @@
         cardIndex++;
       }
       displayQuestion(cards[cardIndex].question, cards[cardIndex].answer, cards[cardIndex].questionNumber);
+      readText("question")
       hideAnswer();
     }
 
@@ -203,6 +205,7 @@
         cardIndex--;
       }
       displayQuestion(cards[cardIndex].question, cards[cardIndex].answer, cards[cardIndex].questionNumber);
+      readText("question")
       hideAnswer();
 
     }
@@ -269,9 +272,12 @@
     recognition.lang = 'en-US';
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
-
-    var msg = new SpeechSynthesisUtterance("Welcome to quiz " + deckName + ". Press space to speak, and say help for a list of commands.");
-    window.speechSynthesis.speak(msg);
+    function intro(){
+      var msg = new SpeechSynthesisUtterance("Welcome to quiz " + deckName + ". Press space to speak, and say help for a list of commands.");
+      window.speechSynthesis.speak(msg);
+      readText("question");
+      
+    }
   
     document.addEventListener('keydown', function(event) {
         if(event.keyCode == 32) {
