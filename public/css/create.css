@@ -1,12 +1,21 @@
 #addButton{
     position: relative;
     top: -37px;
-    left: 150px;
-  }
-  .textbox{
-    width: 100%;
-    border-radius: 5px;
-  }
-  #mainBox{
-    margin-bottom: 150px;
-  }
+    left: 105px;
+}
+
+.textbox{
+  width: 100%;
+  border-radius: 5px;
+}
+
+#mainBox{
+  margin-bottom: 150px;
+}
+
+#cards .previous_question {
+  width: 100%;
+  height: 53px;
+  margin-bottom: 6px;
+}
+

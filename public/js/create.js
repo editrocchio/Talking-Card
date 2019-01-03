@@ -31,7 +31,7 @@
       let newButtonID = "button" + parseInt(uniqueCard);
       newButtonDiv.className = "col-md-2";
       newButton.id = newButtonID;
-      newButton.innerHTML = "-";
+      newButton.innerHTML = "Delete";
       newButton.className = "previous_question btn btn-outline-primary";
       newButton.onclick = function () { removeCard(newRowID); }
       newButtonDiv.appendChild(newButton);
@@ -117,7 +117,7 @@
       let newButtonID = "button" + parseInt(uniqueCard);
       newButtonDiv.className = "col-md-2";
       newButton.id = newButtonID;
-      newButton.innerHTML = "-";
+      newButton.innerHTML = "Delete";
       newButton.className = "previous_question btn btn-outline-primary";
       newButton.onclick = function () { removeCard(newRowID); }
       newButtonDiv.appendChild(newButton);
