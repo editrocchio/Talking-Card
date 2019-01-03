@@ -91,9 +91,15 @@ function showAnswer() {
     document.getElementsByClassName('answer')[0].style.visibility = 'visible';
     displayAnswer = true;
     document.getElementById("get_answer").value = "Hide Answer";
-    if(!muteVoice){
+    if (!muteVoice) {
         readText("answer");
     }
+}
+
+function showAnswer2() {
+    document.getElementsByClassName('answer')[0].style.visibility = 'visible';
+    displayAnswer = true;
+    document.getElementById("get_answer").value = "Hide Answer";
 }
 
 function hideAnswer() {
@@ -173,21 +179,38 @@ document.addEventListener('keydown', function (event) {
 });
 
 recognition2.onresult = function (event) {
-
+    var incstr;
     var last2 = event.results.length - 1;
-
+    var strcon;
     var word2 = (event.results[last2][0].transcript);
     var realAnswer = $("#rAnswer").html();
     console.log(realAnswer);
-    console.log(word2);
-    if (word2.toUpperCase() == realAnswer.toUpperCase()) {
+    incstr = realAnswer.toUpperCase().split(" ");
+    console.log(incstr);
+    console.log("my input" + word2);
+    for (var i = 0; i < incstr.length; i++) {
+        console.log(incstr[i]);
+        console.log(word2.toUpperCase().includes(incstr[i]));
+        if (word2.toUpperCase().includes(incstr[i])) {
+            strcon = true;
+        } else {
+            strcon = false;
+            var msg3 = new SpeechSynthesisUtterance("Wrong try again");
+            window.speechSynthesis.speak(msg3);
+            return;
+        }
+    };
+    //console.log(strcon);
+    //console.log(word2.toUpperCase().split(" ").pop());
+    //console.log(word2.includes(realAnswer));
+    //var regex = new RegExp(word2.split(" ").join('|'));
+    //console.log(word2.split(" ").join('|'))
+
+    if (strcon) {
         console.log("Correctt");
         var msg2 = new SpeechSynthesisUtterance("Correct");
         window.speechSynthesis.speak(msg2);
-    } else {
-        var msg3 = new SpeechSynthesisUtterance("Wrong try again");
-        window.speechSynthesis.speak(msg3);
-
+        showAnswer2();
     }
 }
 document.addEventListener('keyup', function (event) {
