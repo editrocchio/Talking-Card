@@ -188,10 +188,20 @@ recognition2.onresult = function (event) {
     incstr = realAnswer.toUpperCase().split(" ");
     console.log(incstr);
     console.log("my input" + word2);
+    console.log("type of answer: " + typeof (realAnswer));
+
     for (var i = 0; i < incstr.length; i++) {
         console.log(incstr[i]);
+        console.log(word2.toUpperCase());
         console.log(word2.toUpperCase().includes(incstr[i]));
-        if (word2.toUpperCase().includes(incstr[i])) {
+        if (!isNaN(realAnswer)) {
+            console.log("its a number");
+            strcon = word2 == realAnswer;
+            console.log(strcon);
+            var msg3 = new SpeechSynthesisUtterance("Wrong try again");
+            window.speechSynthesis.speak(msg3)
+
+        } else if (word2.toUpperCase().includes(incstr[i])) {
             strcon = true;
         } else {
             strcon = false;
