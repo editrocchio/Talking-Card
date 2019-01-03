@@ -1,11 +1,11 @@
-# Problem
-Noticed a lack of customiziable study tools fo rpeople with reading/visual impairments.
-
 # Talking Card
 
 [Go to app](https://co-op-hackathon.firebaseapp.com/)
 
 Create voice controlled flash card quizzes.
+
+# Problem Domain
+Noticed a lack of customiziable study tools fo rpeople with reading/visual impairments.
 
 # Future Work
 Mobile Support
