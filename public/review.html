@@ -18,6 +18,7 @@
 
   <!-- Custom styles for this template -->
   <link href="css/review.css" rel="stylesheet">
+  <script src="vendor/jquery/jquery.min.js"></script>
 </head>
 
 <body>
@@ -269,7 +270,9 @@
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
 
-
+    var msg = new SpeechSynthesisUtterance("Welcome to quiz " + deckName + ". Press space to speak, and say help for a list of commands.");
+    window.speechSynthesis.speak(msg);
+  
     document.addEventListener('keydown', function(event) {
         if(event.keyCode == 32) {
             console.log('Ready to receive a command.');
