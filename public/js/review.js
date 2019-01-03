@@ -105,7 +105,9 @@ function toggleAnswer() {
     } else {
         showAnswer();
         document.getElementById("get_answer").value = "Hide Answer";
+        if(!muteVoice){
         readText("answer");
+        }
     }
 }
 
