@@ -1,3 +1,8 @@
+h3 {
+    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+
 .answer{
     visibility: hidden;
 }
@@ -27,7 +32,7 @@
     margin: 20px 0;
 }
 
-.btn-primary {
+.justify-content-center .btn-primary {
     margin: 0 5px;
 }
 
