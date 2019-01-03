@@ -18,7 +18,11 @@ h3 {
     min-height: 200px;
     margin: 10px 0;
 }
-
+#logo {
+  height:40px;
+  display:inline-block;
+  margin-right:5px;
+}
 .title-box {
     text-align: center;
     margin: 20px;
