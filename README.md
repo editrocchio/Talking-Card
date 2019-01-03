@@ -1,3 +1,6 @@
+# Problem
+Noticed a lack of customiziable study tools fo rpeople with reading/visual impairments.
+
 # Talking Card
 
 [Go to app](https://co-op-hackathon.firebaseapp.com/)
