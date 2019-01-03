@@ -4,10 +4,10 @@
 
 Create voice controlled flash card quizzes.
 
-# Problem Domain
+## Problem Domain
 Noticed a lack of customiziable study tools fo rpeople with reading/visual impairments.
 
-# Future Work
+## Future Work
 Mobile Support
 Full voice command and more language processing.
 
