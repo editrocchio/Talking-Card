@@ -91,6 +91,9 @@ function showAnswer() {
     document.getElementsByClassName('answer')[0].style.visibility = 'visible';
     displayAnswer = true;
     document.getElementById("get_answer").value = "Hide Answer";
+    if(!muteVoice){
+        readText("answer");
+    }
 }
 
 function hideAnswer() {
@@ -203,12 +206,8 @@ recognition.onresult = function (event) {
 
     if (word == "next") {
         nextQuestion();
-        var msg = new SpeechSynthesisUtterance("question");
-        window.speechSynthesis.speak(msg);
-        readText("question")
     } else if (word == "answer") {
         showAnswer();
-        readText("answer")
     } else if (word == "edit") {
         addAnswer();
     } else if (word == "question") {
@@ -216,10 +215,7 @@ recognition.onresult = function (event) {
         window.speechSynthesis.speak(msg);
         readText("question");
     } else if (word == "previous") {
-        var msg = new SpeechSynthesisUtterance("question");
-        window.speechSynthesis.speak(msg);
         previousQuestion();
-        readText("question");
     } else if (word == "help") {
         var msg = new SpeechSynthesisUtterance("You can say the commands next, previous, edit, question, or help to hear this list again.");
         window.speechSynthesis.speak(msg);
