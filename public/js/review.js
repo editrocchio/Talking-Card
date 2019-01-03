@@ -137,6 +137,13 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
+document.addEventListener('keyup', function (event) {
+    if (event.keyCode == 32) {
+        console.log('Ready to receive a command.');
+        recognition.stop();
+    }
+});
+
 recognition.onresult = function (event) {
     var last = event.results.length - 1;
     var word = (event.results[last][0].transcript);
