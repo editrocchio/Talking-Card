@@ -2,7 +2,11 @@
 
 [Go to app](https://co-op-hackathon.firebaseapp.com/)
 
-Create voice controlled flash card quizzes
+Create voice controlled flash card quizzes.
+
+# Future Work
+Mobile Support
+Full voice command and more language processing.
 
 ## Built With
 
