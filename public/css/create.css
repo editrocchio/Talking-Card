@@ -1,0 +1,12 @@
+#addButton{
+    position: relative;
+    top: -37px;
+    left: 150px;
+  }
+  .textbox{
+    width: 100%;
+    border-radius: 5px;
+  }
+  #mainBox{
+    margin-bottom: 150px;
+  }
