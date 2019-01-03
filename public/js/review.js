@@ -198,8 +198,11 @@ recognition2.onresult = function (event) {
             console.log("its a number");
             strcon = word2 == realAnswer;
             console.log(strcon);
-            var msg3 = new SpeechSynthesisUtterance("Wrong try again");
-            window.speechSynthesis.speak(msg3)
+            if (!strcon) {
+                var msg3 = new SpeechSynthesisUtterance("Wrong try again");
+                window.speechSynthesis.speak(msg3)
+            }
+
 
         } else if (word2.toUpperCase().includes(incstr[i])) {
             strcon = true;
