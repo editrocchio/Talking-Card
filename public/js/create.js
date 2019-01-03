@@ -9,7 +9,7 @@
       let newQuestionDiv = document.createElement("div");
       let newQuestion = document.createElement("textarea");
       let newQuestionID = "question" + parseInt(uniqueCard);
-      newQuestionDiv.className = "col-md-5";
+      newQuestionDiv.className = "col-md";
       newQuestion.id = newQuestionID;
       newQuestion.className = "textbox";
       newQuestion.placeholder = "Question";
@@ -19,7 +19,7 @@
       let newAnswerDiv = document.createElement("div");
       let newAnswer = document.createElement("textarea");
       let newAnswerID = "answer" + parseInt(uniqueCard);
-      newAnswerDiv.className = "col-md-5";
+      newAnswerDiv.className = "col-md";
       newAnswer.className = "textbox";
       newAnswer.id = newAnswerID;
       newAnswer.placeholder = "Answer";
@@ -29,9 +29,9 @@
       let newButtonDiv = document.createElement("div");
       let newButton = document.createElement("button");
       let newButtonID = "button" + parseInt(uniqueCard);
-      newButtonDiv.className = "col-md-2";
+      newButtonDiv.className = "col-md-1";
       newButton.id = newButtonID;
-      newButton.innerHTML = "Delete";
+      newButton.innerHTML = "-";
       newButton.className = "previous_question btn btn-outline-primary";
       newButton.onclick = function () { removeCard(newRowID); }
       newButtonDiv.appendChild(newButton);
@@ -93,7 +93,7 @@
       let newQuestionDiv = document.createElement("div");
       let newQuestion = document.createElement("textarea");
       let newQuestionID = "question" + parseInt(uniqueCard);
-      newQuestionDiv.className = "col-md-5";
+      newQuestionDiv.className = "col-md";
       newQuestion.className = "textbox";
       newQuestion.id = newQuestionID;
       newQuestion.placeholder = "Question";
@@ -104,7 +104,7 @@
       let newAnswerDiv = document.createElement("div");
       let newAnswer = document.createElement("textarea");
       let newAnswerID = "answer" + parseInt(uniqueCard);
-      newAnswerDiv.className = "col-md-5";
+      newAnswerDiv.className = "col-md";
       newAnswer.className = "textbox";
       newAnswer.id = newAnswerID;
       newAnswer.placeholder = "Answer";
@@ -115,9 +115,9 @@
       let newButtonDiv = document.createElement("div");
       let newButton = document.createElement("button");
       let newButtonID = "button" + parseInt(uniqueCard);
-      newButtonDiv.className = "col-md-2";
+      newButtonDiv.className = "col-md-1";
       newButton.id = newButtonID;
-      newButton.innerHTML = "Delete";
+      newButton.innerHTML = "-";
       newButton.className = "previous_question btn btn-outline-primary";
       newButton.onclick = function () { removeCard(newRowID); }
       newButtonDiv.appendChild(newButton);
