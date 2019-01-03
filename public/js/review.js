@@ -143,7 +143,7 @@ recognition.lang = 'en-US';
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
-var msg = new SpeechSynthesisUtterance("Welcome to quiz " + deckName + ". Press space to speak, and say help for a list of commands.");
+var msg = new SpeechSynthesisUtterance("Welcome to quiz " + deckName + ". Press space to speak, and say help for a list of commands. Or press A to answer.");
 window.speechSynthesis.speak(msg);
 
 document.addEventListener('keydown', function (event) {
