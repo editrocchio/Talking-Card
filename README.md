@@ -17,4 +17,4 @@ Full voice command and more language processing.
 * [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) - API used for speech recognition and speech synthesis
 
 ## Made by
-Pritpal Gill, Joshua Lam, Min Lee, Emilio Ditrocchio, Derek Dang
+Paul Gill, Joshua Lam, Min Lee, Emilio Ditrocchio, Derek Dang
